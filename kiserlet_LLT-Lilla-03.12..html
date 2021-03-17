@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="jspsych-psychophysics-2.0/jspsych.js"></script>
+  <script src="jspsych-6.2.0\plugins\jspsych-instructions.js"></script>
+  <script src="jspsych-psychophysics-2.0\jspsych-psychophysics.js"></script>
+  <script src="jspsych-6.2.0\plugins\jspsych-html-keyboard-response.js"></script>
+  <script scr="jspsych-6.2.0\plugins\jspsych-html-button-response.js"></script>
+  <script scr="jspsych-6.2.0\plugins\jspsych-fullscreen.js"></script>
+  <link rel="stylesheet" href="jspsych-psychophysics-2.0/css/jspsych.css"></link>
+
+</head>
+<body></body>
+<script>
+
+document.addEventListener('contextmenu', event => event.preventDefault());
+
+function changeBackground(color) {
+  document.body.style.background = color;
+}
+
+window.addEventListener("load",function() { changeBackground('black') });
+
+var text_color = "white"
+
+var timeline = []
+
+var picture_width = window.innerWidth/100*6.5
+console.log(window.innerHeight)
+var picture_height = window.innerHeight/100*10
+
+//lists for practice
+
+let practice_picture_list = [
+  {stimulus: "List1/2.bmp", X: window.innerWidth/100*28, Y: window.innerHeight/100*42},
+  {stimulus: "List1/3.bmp", X: window.innerWidth/100*35, Y: window.innerHeight/100*64},
+  {stimulus: "List1/4.bmp", X: window.innerWidth/100*49, Y: window.innerHeight/100*31},
+]
+
+let practice_recall_list = [
+  {stimulus: "List1/6.bmp", left_X: window.innerWidth/100*49, right_X: window.innerWidth/100*49 + picture_width, top_Y: window.innerHeight/100*53, bottom_Y: window.innerHeight/100*53 +picture_height, was: 2},
+  {stimulus: "List1/4.bmp", left_X: window.innerWidth/100*49, right_X: window.innerWidth/100*49 + picture_width, top_Y: window.innerHeight/100*31, bottom_Y: window.innerHeight/100*31 + picture_height, was: 0},
+  {stimulus: "List1/2.bmp", left_X: window.innerWidth/100*28, right_X: window.innerWidth/100*28 + picture_width, top_Y: window.innerHeight/100*42, bottom_Y: window.innerHeight/100*42 + picture_height, was: 0},
+  {stimulus: "List1/12.bmp", left_X: window.innerWidth/100*42, right_X: window.innerWidth/100*42 + picture_width, top_Y: window.innerHeight/100*53, bottom_Y: window.innerHeight/100*53 +picture_height, was: 2},
+  {stimulus: "List1/3.bmp", left_X: window.innerWidth/100*35, right_X: window.innerWidth/100*35 + picture_width, top_Y: window.innerHeight/100*64, bottom_Y: window.innerHeight/100*64 +picture_height, was: 0},
+  {stimulus: "List1/20.bmp", left_X: window.innerWidth/100*56, right_X: window.innerWidth/100*56 + picture_width, top_Y: window.innerHeight/100*20, bottom_Y: window.innerHeight/100*20 +picture_height, was: 2},
+] 
+//console.log(practice_picture_list)
+//console.log(practice_recall_list)
+// lists for trials
+
+//picture_list:
+
+let place_X_order = [window.innerWidth/100*28, window.innerWidth/100*35, window.innerWidth/100*42, window.innerWidth/100*49, window.innerWidth/100*56];
+let place_Y_order = [window.innerHeight/100*20, window.innerHeight/100*31, window.innerHeight/100*42, window.innerHeight/100*53, window.innerHeight/100*64];
+
+let grid_list_order = []; //rács koordináták listája
+
+for (x=0; x< place_X_order.length; x++){
+  for (y=0; y<place_Y_order.length; y++){
+    grid_list_order.push([place_X_order[x], place_Y_order[y]]);
+  } //25 elemű lista, amely tartalmazza a koordináta párokat
+}
+console.log(grid_list_order);
+
+let grid_list = jsPsych.randomization.shuffle(grid_list_order);
+
+let picture_call_order = ["List1/1.bmp", "List1/5.bmp", "List1/7.bmp","List1/8.bmp","List1/9.bmp", "List1/10.bmp", "List1/11.bmp", "List1/13.bmp", "List1/14.bmp", "List1/15.bmp", "List1/16.bmp", "List1/17.bmp", "List1/18.bmp", "List1/19.bmp", "List1/21.bmp", "List1/22.bmp", "List1/23.bmp", "List1/24.bmp", "List1/25.bmp", "List1/26.bmp", "List1/27.bmp", "List1/28.bmp", "List1/29.bmp", "List1/30.bmp", ]
+let picture_call = jsPsych.randomization.shuffle(picture_call_order) //randomizált képlista
+
+let picture_list = []
+
+function generate_picture_list(arr){
+  for (i=0; i<12; i++){
+      onerow = {stimulus: picture_call[i], X: grid_list[i][0], Y: grid_list[i][1]},
+      arr.push(onerow)
+    } //sorba helyezi az első 12 elemét a képlistának és koordinátalistának és beteszi a picture_list-be
+}  
+
+generate_picture_list(picture_list);
+console.log(picture_list);
+
+// Recall_list: 
+
+let recall_list_order = []
+      
+function generate_recall_list(array){
+  for (i=0; i<24; i++){
+    if (i<12){
+      onerow = {stimulus: picture_call[i], left_X: grid_list[i][0], right_X: grid_list[i][0] + picture_width, top_Y: grid_list[i][1], bottom_Y: grid_list[i][1] + picture_height, was: 0},
+      array.push(onerow);
+    }
+    else{
+      onerow = {stimulus: picture_call[i], left_X: grid_list[i][0], right_X: grid_list[i][0] + picture_width, top_Y: grid_list[i][1], bottom_Y: grid_list[i][1] + picture_height, was: 2},
+      array.push(onerow);
+    }
+  }
+}
+generate_recall_list(recall_list_order);
+let recall_list =  jsPsych.randomization.shuffle(recall_list_order);
+console.log(recall_list);
+
+    //Drawing objects
+    var gray = {
+      obj_type: 'image',
+      file: 'gray_square.bmp',
+      drawFunc: function(stimulus, canvas, context){
+        list_X = [window.innerWidth/100*28, window.innerWidth/100*35, window.innerWidth/100*42, window.innerWidth/100*49, window.innerWidth/100*56]
+        list_Y = [window.innerHeight/100*20, window.innerHeight/100*31, window.innerHeight/100*42, window.innerHeight/100*53, window.innerHeight/100*64]
+        console.log(window.innerHeight)
+        for (i=0; i<25; i++){
+          for (j=0; j<25; j++){
+            context.drawImage(stimulus.img, grid_list_order[i][0], grid_list_order[j][1], picture_width, picture_height)
+          }
+        } 
+      }
+    }
+
+    var img_memorise = {
+        obj_type: 'image',
+        file: jsPsych.timelineVariable('stimulus'),
+        drawFunc: function(stimulus, canvas, context){
+            context.drawImage(stimulus.img, jsPsych.timelineVariable('X', true), jsPsych.timelineVariable('Y', true), picture_width, picture_height);
+        }
+    }
+
+    var img_recall = {
+        obj_type: 'image',
+        file: jsPsych.timelineVariable('stimulus'),
+        drawFunc: function(stimulus, canvas, context){
+            context.drawImage(stimulus.img, window.innerWidth/100*28, window.innerHeight/100*4, picture_width, picture_height);
+        }
+    }
+  
+
+    var text_seen = {
+      obj_type: 'manual',
+      drawFunc: function(stimulus, canvas, context){
+        context.fillStyle=text_color;
+        context.font='36px serif';
+        context.fillText('Látta már ezt a képet?', window.innerWidth/100*37, window.innerHeight/100*10);
+      }
+    }; 
+
+    var text_where = {
+      obj_type: 'manual',
+      drawFunc: function(stimulus, canvas, context){
+        context.fillStyle=text_color;
+        context.font='36px serif';
+        context.fillText('Hol látta?', window.innerWidth/100*37, window.innerHeight/100*10);
+      }
+    };
+
+    /*var text_response = {
+      obj_type: 'manual',
+      drawFunc: function(stimulus, canvas, context){
+        context.fillStyle=text_color;
+        context.font='26px serif';
+        context.fillText('Bal egérgomb: láttam | Jobb egérgomb: nem láttam', window.innerWidth/100*32, window.innerHeight/100*90);
+      }
+    } */
+    
+    var text_feedback = {
+      obj_type: 'manual',
+      drawFunc: function(stimulus, canvas, context){
+        x = jsPsych.data.get().filter({correct_position: true}).count();
+        context.fillStyle=text_color;
+        context.font='32px serif';
+        context.fillText('Helyes válaszok száma: '+x, window.innerWidth/100*40, window.innerHeight/100*50);
+      }
+    }
+
+    //Trials
+    
+    var fullscreen = {
+      type: 'fullscreen',
+      message: '<p style="color:' + text_color + '">A kísérlet teljes képernyős módra vált. Nyomd meg a gombot a folytatáshoz!</p>',
+      button_label: 'Folytatás',
+      fullscreen_mode: true,
+    };
+    //timeline.push(fullscreen)
+
+    var trial_instruction1 = {
+      type: 'instructions',
+      pages: ['<h1 style="color:' + text_color + '"> Üdvözöllek a kísérletben!</h1> <p style="color:' + text_color + '"> A következőkben egy memória játékot fogunk játszani. 25db lefordított kártyát fogunk mutatni. Ezután egy kártyát rövid időre felfordítunk, így láthatod milyen tárgyat ábrázol, pl. egy lufit. Ezután újabb kártyákat fordítunk fel. Az a feladat, hogy megjegyezd, melyik tárgyat hol láttad.</p> <p style="color:' + text_color + '">Először 3 kártyát mutatunk meg gyakorlásképp.</p>'],
+      show_clickable_nav: true,
+      button_label_next: 'Tovább',
+      allow_backward: false
+    }
+    var trial_instruction2 = {
+      type: 'instructions',
+      pages: ['<p style="color:' + text_color + '">Miután memorizáltad a képeket, és a helyüket, új képeket fogunk mutatni a lefordított kártyák fölött. Ezek közt lesznek új képek is, amiket korábban nem mutattunk meg. Mindegyikről megkérdezzük, hogy láttad-e már.</p><p style="color:' + text_color + '">Amennyiben a válasz igen, megkérdezzük, hogy hol láttad a képet. Ekkor csak kattints arra a kártyára, amelyiknél láttad a képet.</p>'],
+      show_clickable_nav: true,
+      button_label_next: 'Tovább',
+      allow_backward: false
+      //allow_backward: true
+    } 
+
+    var trial_instruction3 = {
+      type: 'instructions',
+      pages: ['<p style="color:' + text_color + '">A játék pontosan úgy működik, ahogy az imént gyakoroltuk, azzal a különbséggel, hogy most 12 képet fogunk mutatni. Ismételten meg kell jegyezned azokat a kártyákat ahol a kép megjelenik. Amikor megmutatjuk a kártyákat, mondd ki hangosan a látottt kép nevét, és próbáld alaposan megjegyezni a helyét. Ha készen állsz, nyomd meg a Next gombot. </p>'],
+      show_clickable_nav: true,
+      button_label_next: 'Tovább',
+      allow_backward: false
+    }
+
+    var trial_memorise = {
+        type: 'psychophysics',
+        stimuli: [gray, img_memorise],
+        background_color: 'black',
+        response_type: 'mouse',
+        response_start_time: 0,
+        data: {type: 'trial_memorise'},
+        trial_duration: 3000,
+    }
+
+    var trial_recall = {
+        type: 'psychophysics',
+        stimuli: [gray, img_recall, text_seen], // text_response],
+        background_color: 'black',
+        response_type: 'button',
+        button_choices: ['Igen', 'Nem'],
+        horiz_button_margin: window.innerWidth/100*50 + 'px', 
+        vert_button_margin: window.innerHeight/100*10 + 'px',
+        //response_start_time: 0,
+        data: {type: 'trial_recall'},
+        on_finish: function(data){
+          data.button_pressed = event.button_pressed; // button_pressed értéke: Igen = 0, Nem = 1; itt nem tudom, hogy kell jól megadni
+          data.correct_response = jsPsych.timelineVariable('was', true)
+          data.correct = data.button_pressed == data.correct_response
+          data.correct_recall = data.correct;
+        }
+    }
+
+    var trial_position = {
+        type: 'psychophysics',
+        stimuli: [gray, img_recall, text_where],
+        background_color: 'black',
+        response_type: 'mouse',
+        response_start_time: 0,
+        data: {type: 'trial_position'},
+        on_finish: function(data){
+          data.positionLeft = jsPsych.timelineVariable('left_X', true);
+          data.positionRight = jsPsych.timelineVariable('right_X', true);
+          data.positionTop = jsPsych.timelineVariable('top_Y', true);
+          data.positionBottom = jsPsych.timelineVariable('bottom_Y', true);
+          data.correct = data.click_x > data.positionLeft && data.click_x < data.positionRight && data.click_y < data.positionBottom && data.click_y > data.positionTop
+          data.correct_position = data.correct;
+        }
+    }
+
+    var if_node ={
+      timeline: [trial_position],
+      conditional_function: function(){
+        var data = jsPsych.data.get().last(1).values()[0];
+        if (data.button_pressed == 0){
+          return true;
+        } else {
+          return false;
+        }
+      }
+    }
+
+    var trial_feedback = {
+      type: 'psychophysics',
+      stimuli: [text_feedback],
+      background_color: 'black',
+      response_type: 'mouse',
+      response_start_time: 0,
+      data: {type: 'trial_feedback'},
+    }  
+
+    //Trial blocks
+
+    //timeline.push(trial_instruction1) 
+
+    var trials_practice_memorize = {
+      timeline: [trial_memorise],
+      timeline_variables: practice_picture_list,
+    }
+
+    //timeline.push(trials_practice_memorize)
+    //timeline.push(trial_instruction2) 
+    
+    var trials_practice_recall = {
+      timeline: [trial_recall, if_node],
+      timeline_variables: practice_recall_list,
+    }
+    timeline.push(trials_practice_recall)
+    timeline.push(trial_instruction3) 
+
+    var trials_recall = {
+      timeline: [trial_recall, if_node],
+      timeline_variables: recall_list,
+    }
+    
+    var trials_memorise = {
+      timeline: [trial_memorise],
+      timeline_variables: picture_list,
+    }
+    timeline.push(trials_memorise)
+
+    var trials_recall = {
+      timeline: [trial_recall, if_node],
+      timeline_variables: recall_list,
+    }
+    timeline.push(trials_recall)
+    timeline.push(trial_feedback)
+    //console.log('jsPsych.init()-et meghívjuk, a kísérlet elkezdődik')
+    
+    // exit fullscreen mode
+    var fullscreen_end = {
+    type: 'fullscreen',
+    fullscreen_mode: false
+    };
+    //timeline.push(fullscreen_end)
+    
+    jsPsych.init({
+        timeline: timeline,
+        use_webaudio: 'true', 
+        override_safe_mode: 'true',
+        on_finish: function(){jsPsych.data.displayData();}
+    });
+</script>
+
+</html>
