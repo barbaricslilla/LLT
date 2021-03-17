@@ -12,7 +12,7 @@
 </head>
 <body></body>
 <script>
-
+//Setup
 document.addEventListener('contextmenu', event => event.preventDefault());
 
 function changeBackground(color) {
@@ -131,8 +131,7 @@ console.log(recall_list);
             context.drawImage(stimulus.img, window.innerWidth/100*28, window.innerHeight/100*4, picture_width, picture_height);
         }
     }
-  
-
+    
     var text_seen = {
       obj_type: 'manual',
       drawFunc: function(stimulus, canvas, context){
@@ -140,7 +139,7 @@ console.log(recall_list);
         context.font='36px serif';
         context.fillText('Látta már ezt a képet?', window.innerWidth/100*37, window.innerHeight/100*10);
       }
-    }; 
+    };
 
     var text_where = {
       obj_type: 'manual',
@@ -151,15 +150,15 @@ console.log(recall_list);
       }
     };
 
-    /*var text_response = {
+    var text_response = {
       obj_type: 'manual',
       drawFunc: function(stimulus, canvas, context){
         context.fillStyle=text_color;
         context.font='26px serif';
         context.fillText('Bal egérgomb: láttam | Jobb egérgomb: nem láttam', window.innerWidth/100*32, window.innerHeight/100*90);
       }
-    } */
-    
+    }
+
     var text_feedback = {
       obj_type: 'manual',
       drawFunc: function(stimulus, canvas, context){
@@ -174,34 +173,33 @@ console.log(recall_list);
     
     var fullscreen = {
       type: 'fullscreen',
-      message: '<p style="color:' + text_color + '">A kísérlet teljes képernyős módra vált. Nyomd meg a gombot a folytatáshoz!</p>',
+      message: '<p style="color:' + text_color + '">A kísérlet teljes képernyős módra vált. Nyomja meg a gombot a folytatáshoz!</p>',
       button_label: 'Folytatás',
       fullscreen_mode: true,
     };
-    //timeline.push(fullscreen)
+    timeline.push(fullscreen)
 
     var trial_instruction1 = {
       type: 'instructions',
-      pages: ['<h1 style="color:' + text_color + '"> Üdvözöllek a kísérletben!</h1> <p style="color:' + text_color + '"> A következőkben egy memória játékot fogunk játszani. 25db lefordított kártyát fogunk mutatni. Ezután egy kártyát rövid időre felfordítunk, így láthatod milyen tárgyat ábrázol, pl. egy lufit. Ezután újabb kártyákat fordítunk fel. Az a feladat, hogy megjegyezd, melyik tárgyat hol láttad.</p> <p style="color:' + text_color + '">Először 3 kártyát mutatunk meg gyakorlásképp.</p>'],
+      pages: ['<h1 style="color:' + text_color + '"> Üdvözlöm a kísérletben!</h1> <p style="color:' + text_color + '"> A következőkben egy memória játékot játszhat Ön. 25db lefordított kártyát fogunk mutatni. Ezután egy kártyát rövid időre felfordítunk, így láthatja milyen tárgyat ábrázol. Ezután újabb kártyákat fordítunk fel. Jegyezze meg a felfordított kártyán lévő képet.</p> <p style="color:' + text_color + '">Először 3 kártyát mutatunk meg gyakorlásképp. Ha készen áll, nyomja meg a "Folytatás" gombot. </p>"'],
       show_clickable_nav: true,
-      button_label_next: 'Tovább',
-      allow_backward: false
+      button_label_next: 'Folytatás',
+      allow_backward: false,
     }
     var trial_instruction2 = {
       type: 'instructions',
-      pages: ['<p style="color:' + text_color + '">Miután memorizáltad a képeket, és a helyüket, új képeket fogunk mutatni a lefordított kártyák fölött. Ezek közt lesznek új képek is, amiket korábban nem mutattunk meg. Mindegyikről megkérdezzük, hogy láttad-e már.</p><p style="color:' + text_color + '">Amennyiben a válasz igen, megkérdezzük, hogy hol láttad a képet. Ekkor csak kattints arra a kártyára, amelyiknél láttad a képet.</p>'],
+      pages: ['<p style="color:' + text_color + '">Miután megjegyzte a felfordított kártyákat, új kártyákat fogunk mutatni a lefordított kártyák fölött. Mindegyikről megkérdezzük, hogy látta-e már.</p><p style="color:' + text_color + '">Ha a válasz <b>igen, kattintson az "Igen" gombra."</b></p> <p style="color:' + text_color + '"> Ha a válasz <b>nem, kattintson a "Nem" gombra.</b></p><p style="color:' + text_color + '">Majd megkérdezzük, hogy hol látta a kártyát. Ekkor csak kattintson a megfelelő kártyára.</p>'],
       show_clickable_nav: true,
-      button_label_next: 'Tovább',
-      allow_backward: false
-      //allow_backward: true
+      button_label_next: 'Folytatás',
+      allow_backward: false,
     } 
 
     var trial_instruction3 = {
       type: 'instructions',
-      pages: ['<p style="color:' + text_color + '">A játék pontosan úgy működik, ahogy az imént gyakoroltuk, azzal a különbséggel, hogy most 12 képet fogunk mutatni. Ismételten meg kell jegyezned azokat a kártyákat ahol a kép megjelenik. Amikor megmutatjuk a kártyákat, mondd ki hangosan a látottt kép nevét, és próbáld alaposan megjegyezni a helyét. Ha készen állsz, nyomd meg a Next gombot. </p>'],
+      pages: ['<p style="color:' + text_color + '">A játék pontosan úgy működik, ahogy az imént gyakoroltuk, azzal a különbséggel, hogy most 12 kártyát fogunk felfordítani. Ismételten meg kell jegyeznie azokat a kártyákat ahol a kép megjelenik. Ha készen áll, nyomja meg a "Folytatás" gombot. </p>'],
       show_clickable_nav: true,
-      button_label_next: 'Tovább',
-      allow_backward: false
+      button_label_next: 'Folytatás',
+      allow_backward: false,
     }
 
     var trial_memorise = {
@@ -216,18 +214,18 @@ console.log(recall_list);
 
     var trial_recall = {
         type: 'psychophysics',
-        stimuli: [gray, img_recall, text_seen], // text_response],
+        stimuli: [gray, img_recall, text_seen],
         background_color: 'black',
         response_type: 'button',
-        button_choices: ['Igen', 'Nem'],
-        horiz_button_margin: window.innerWidth/100*50 + 'px', 
-        vert_button_margin: window.innerHeight/100*10 + 'px',
-        //response_start_time: 0,
+        button_choices: ['Láttam', 'Nem láttam'],
+        vert_button_margin: '0px',
+        horiz_button_margin: '100px',
+        response_start_time: 0,
         data: {type: 'trial_recall'},
         on_finish: function(data){
-          data.button_pressed = event.button_pressed; // button_pressed értéke: Igen = 0, Nem = 1; itt nem tudom, hogy kell jól megadni
+          data.button_press = event.button;
           data.correct_response = jsPsych.timelineVariable('was', true)
-          data.correct = data.button_pressed == data.correct_response
+          data.correct = data.mouse_press == data.correct_response
           data.correct_recall = data.correct;
         }
     }
@@ -272,15 +270,15 @@ console.log(recall_list);
 
     //Trial blocks
 
-    //timeline.push(trial_instruction1) 
+    timeline.push(trial_instruction1) 
 
     var trials_practice_memorize = {
       timeline: [trial_memorise],
       timeline_variables: practice_picture_list,
     }
 
-    //timeline.push(trials_practice_memorize)
-    //timeline.push(trial_instruction2) 
+    timeline.push(trials_practice_memorize)
+    timeline.push(trial_instruction2) 
     
     var trials_practice_recall = {
       timeline: [trial_recall, if_node],
@@ -313,7 +311,7 @@ console.log(recall_list);
     type: 'fullscreen',
     fullscreen_mode: false
     };
-    //timeline.push(fullscreen_end)
+    timeline.push(fullscreen_end)
     
     jsPsych.init({
         timeline: timeline,
@@ -321,6 +319,4 @@ console.log(recall_list);
         override_safe_mode: 'true',
         on_finish: function(){jsPsych.data.displayData();}
     });
-</script>
-
 </html>
