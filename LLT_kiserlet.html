@@ -2,11 +2,11 @@
 <html>
 <head>
   <script src="jspsych-psychophysics-2.0/jspsych.js"></script>
-  <script src="jspsych-6.2.0\plugins\jspsych-instructions.js"></script>
-  <script src="jspsych-psychophysics-2.0\jspsych-psychophysics.js"></script>
-  <script src="jspsych-6.2.0\plugins\jspsych-html-keyboard-response.js"></script>
-  <script scr="jspsych-6.2.0\plugins\jspsych-html-button-response.js"></script>
-  <script scr="jspsych-6.2.0\plugins\jspsych-fullscreen.js"></script>
+  <script src="jspsych-6.2.0/plugins/jspsych-instructions.js"></script>
+  <script src="jspsych-psychophysics-2.0/jspsych-psychophysics.js"></script>
+  <script src="jspsych-6.2.0/plugins/jspsych-html-keyboard-response.js"></script>
+  <script src="jsPsych-6.2.0/plugins/jspsych-fullscreen.js"></script>
+  <script src="jsPsych-6.2.0/plugins/jspsych-external-html.js"></script>
   <link rel="stylesheet" href="jspsych-psychophysics-2.0/css/jspsych.css"></link>
 
 </head>
@@ -105,13 +105,9 @@ console.log(recall_list);
       obj_type: 'image',
       file: 'gray_square.bmp',
       drawFunc: function(stimulus, canvas, context){
-        list_X = [window.innerWidth/100*28, window.innerWidth/100*35, window.innerWidth/100*42, window.innerWidth/100*49, window.innerWidth/100*56]
-        list_Y = [window.innerHeight/100*20, window.innerHeight/100*31, window.innerHeight/100*42, window.innerHeight/100*53, window.innerHeight/100*64]
-        console.log(window.innerHeight)
+        //console.log(window.innerHeight)
         for (i=0; i<25; i++){
-          for (j=0; j<25; j++){
-            context.drawImage(stimulus.img, grid_list_order[i][0], grid_list_order[j][1], picture_width, picture_height)
-          }
+          context.drawImage(stimulus.img, grid_list_order[i][0], grid_list_order[i][1], picture_width, picture_height)
         } 
       }
     }
@@ -169,8 +165,9 @@ console.log(recall_list);
       }
     }
 
+
     //Trials
-    
+
     var fullscreen = {
       type: 'fullscreen',
       message: '<p style="color:' + text_color + '">A kísérlet teljes képernyős módra vált. Nyomja meg a gombot a folytatáshoz!</p>',
@@ -215,6 +212,7 @@ console.log(recall_list);
     var trial_recall = {
         type: 'psychophysics',
         stimuli: [gray, img_recall, text_seen],
+        canvas_height: window.innerHeight*0.8,
         background_color: 'black',
         response_type: 'button',
         button_choices: ['Láttam', 'Nem láttam'],
@@ -233,6 +231,7 @@ console.log(recall_list);
     var trial_position = {
         type: 'psychophysics',
         stimuli: [gray, img_recall, text_where],
+        canvas_height: window.innerHeight*0.8,
         background_color: 'black',
         response_type: 'mouse',
         response_start_time: 0,
@@ -315,8 +314,9 @@ console.log(recall_list);
     
     jsPsych.init({
         timeline: timeline,
-        use_webaudio: 'true', 
+        use_webaudio: 'false', 
         override_safe_mode: 'true',
-        on_finish: function(){jsPsych.data.displayData();}
+        //on_finish: function(){jsPsych.data.displayData();}
     });
+</script>
 </html>
