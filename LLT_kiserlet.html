@@ -30,9 +30,9 @@ var text_color = "white"
 
 var timeline = []
 
-var picture_width = window.innerWidth/100*6.5
+var picture_width = window.innerWidth/100*9.75
 console.log(window.innerHeight)
-var picture_height = window.innerHeight/100*10
+var picture_height = window.innerHeight/100*15
 
 //lists for practice
 
@@ -56,8 +56,8 @@ let practice_recall_list = [
 
 //picture_list:
 
-let place_X_order = [window.innerWidth/100*28, window.innerWidth/100*35, window.innerWidth/100*42, window.innerWidth/100*49, window.innerWidth/100*56];
-let place_Y_order = [window.innerHeight/100*20, window.innerHeight/100*31, window.innerHeight/100*42, window.innerHeight/100*53, window.innerHeight/100*64];
+let place_X_order = [window.innerWidth/100*30, window.innerWidth/100*40, window.innerWidth/100*50, window.innerWidth/100*60, window.innerWidth/100*70];
+let place_Y_order = [window.innerHeight/100*18.58, window.innerHeight/100*34.29, window.innerHeight/100*50, window.innerHeight/100*65.71, window.innerHeight/100*81.42];
 
 let grid_list_order = []; //rács koordináták listája
 
@@ -129,7 +129,7 @@ console.log(recall_list);
         obj_type: 'image',
         file: jsPsych.timelineVariable('stimulus'),
         drawFunc: function(stimulus, canvas, context){
-            context.drawImage(stimulus.img, window.innerWidth/100*28, window.innerHeight/100*4, picture_width, picture_height);
+            context.drawImage(stimulus.img, window.innerWidth/100*30, window.innerHeight/100*2, picture_width, picture_height);
         }
     }
     
@@ -137,8 +137,8 @@ console.log(recall_list);
       obj_type: 'manual',
       drawFunc: function(stimulus, canvas, context){
         context.fillStyle=text_color;
-        context.font='36px serif';
-        context.fillText('Látta már ezt a képet?', window.innerWidth/100*37, window.innerHeight/100*10);
+        context.font='52px serif';
+        context.fillText('Látta már ezt a képet?', window.innerWidth/100*41.5, window.innerHeight/100*10);
       }
     };
 
@@ -146,19 +146,19 @@ console.log(recall_list);
       obj_type: 'manual',
       drawFunc: function(stimulus, canvas, context){
         context.fillStyle=text_color;
-        context.font='36px serif';
-        context.fillText('Hol látta?', window.innerWidth/100*37, window.innerHeight/100*10);
+        context.font='52px serif';
+        context.fillText('Hol látta?', window.innerWidth/100*41.5, window.innerHeight/100*10);
       }
     };
 
-    var text_response = {
+    /* var text_response = {
       obj_type: 'manual',
       drawFunc: function(stimulus, canvas, context){
         context.fillStyle=text_color;
         context.font='26px serif';
         context.fillText('Bal egérgomb: láttam | Jobb egérgomb: nem láttam', window.innerWidth/100*32, window.innerHeight/100*90);
       }
-    }
+    } */
 
     var text_feedback = {
       obj_type: 'manual',
