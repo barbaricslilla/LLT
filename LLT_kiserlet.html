@@ -34,24 +34,49 @@ var picture_width = window.innerWidth/100*9.75
 console.log(window.innerHeight)
 var picture_height = window.innerHeight/100*15
 
+// coordinates for easy adjustment
+var X_first = window.innerWidth/100*30
+var X_second = window.innerWidth/100*40
+var X_third = window.innerWidth/100*50
+var X_fourth = window.innerWidth/100*60
+var X_fifth =  window.innerWidth/100*70
+var Y_first = window.innerHeight/100*18.58
+var Y_second = window.innerHeight/100*34.29
+var Y_third = window.innerHeight/100*50
+var Y_fourth = window.innerHeight/100*65.71
+var Y_fifth = window.innerHeight/100*81.42
+
 //lists for practice
 
-let practice_picture_list = [
-  {stimulus: "List1/2.bmp", X: window.innerWidth/100*28, Y: window.innerHeight/100*42},
-  {stimulus: "List1/3.bmp", X: window.innerWidth/100*35, Y: window.innerHeight/100*64},
-  {stimulus: "List1/4.bmp", X: window.innerWidth/100*49, Y: window.innerHeight/100*31},
+let practice_picture_list_1 = [
+  {stimulus: "ListPractice/2.bmp", X: X_second, Y: Y_fourth},
+  {stimulus: "ListPractice/3.bmp", X: X_fifth, Y: Y_second},
+  {stimulus: "ListPractice/4.bmp", X: X_first, Y: Y_third},
 ]
 
-let practice_recall_list = [
-  {stimulus: "List1/6.bmp", left_X: window.innerWidth/100*49, right_X: window.innerWidth/100*49 + picture_width, top_Y: window.innerHeight/100*53, bottom_Y: window.innerHeight/100*53 +picture_height, was: 2},
-  {stimulus: "List1/4.bmp", left_X: window.innerWidth/100*49, right_X: window.innerWidth/100*49 + picture_width, top_Y: window.innerHeight/100*31, bottom_Y: window.innerHeight/100*31 + picture_height, was: 0},
-  {stimulus: "List1/2.bmp", left_X: window.innerWidth/100*28, right_X: window.innerWidth/100*28 + picture_width, top_Y: window.innerHeight/100*42, bottom_Y: window.innerHeight/100*42 + picture_height, was: 0},
-  {stimulus: "List1/12.bmp", left_X: window.innerWidth/100*42, right_X: window.innerWidth/100*42 + picture_width, top_Y: window.innerHeight/100*53, bottom_Y: window.innerHeight/100*53 +picture_height, was: 2},
-  {stimulus: "List1/3.bmp", left_X: window.innerWidth/100*35, right_X: window.innerWidth/100*35 + picture_width, top_Y: window.innerHeight/100*64, bottom_Y: window.innerHeight/100*64 +picture_height, was: 0},
-  {stimulus: "List1/20.bmp", left_X: window.innerWidth/100*56, right_X: window.innerWidth/100*56 + picture_width, top_Y: window.innerHeight/100*20, bottom_Y: window.innerHeight/100*20 +picture_height, was: 2},
+let practice_recall_list_1 = [
+  {stimulus: "List1/28.bmp", left_X: window.innerWidth/100*49, right_X: window.innerWidth/100*49 + picture_width, top_Y: window.innerHeight/100*53, bottom_Y: window.innerHeight/100*53 +picture_height, was: 2},
+  {stimulus: "ListPractice/4.bmp", left_X: X_first, right_X: X_first + picture_width, top_Y: Y_third, bottom_Y: Y_third + picture_height, was: 0},
+  {stimulus: "ListPractice/2.bmp", left_X: X_second, right_X: X_second + picture_width, top_Y: Y_fourth, bottom_Y: Y_fourth + picture_height, was: 0},
+  {stimulus: "List1/29.bmp", left_X: window.innerWidth/100*42, right_X: window.innerWidth/100*42 + picture_width, top_Y: window.innerHeight/100*53, bottom_Y: window.innerHeight/100*53 +picture_height, was: 2},
+  {stimulus: "ListPractice/3.bmp", left_X: X_fifth, right_X: X_fifth + picture_width, top_Y: Y_second, bottom_Y: Y_second + picture_height, was: 0},
+  {stimulus: "List1/30.bmp", left_X: window.innerWidth/100*56, right_X: window.innerWidth/100*56 + picture_width, top_Y: window.innerHeight/100*20, bottom_Y: window.innerHeight/100*20 +picture_height, was: 2},
 ] 
-//console.log(practice_picture_list)
-//console.log(practice_recall_list)
+
+let practice_picture_list_2 = [
+  {stimulus: "ListPractice/1.bmp", X: X_fourth, Y: Y_fourth},
+  {stimulus: "ListPractice/5.bmp", X: X_fourth, Y: Y_first},
+  {stimulus: "ListPractice/6.bmp", X: X_third, Y: Y_second},
+]
+let practice_recall_list_2 = [
+  {stimulus: "List1/27.bmp", left_X: window.innerWidth/100*49, right_X: window.innerWidth/100*49 + picture_width, top_Y: window.innerHeight/100*53, bottom_Y: window.innerHeight/100*53 +picture_height, was: 2},
+  {stimulus: "ListPractice/5.bmp", left_X: X_fourth, right_X: X_fourth + picture_width, top_Y: Y_first, bottom_Y: Y_first + picture_height, was: 0},
+  {stimulus: "ListPractice/1.bmp", left_X: X_fourth, right_X: X_fourth + picture_width, top_Y: Y_fourth, bottom_Y: Y_fourth + picture_height, was: 0},
+  {stimulus: "List1/26.bmp", left_X: window.innerWidth/100*42, right_X: window.innerWidth/100*42 + picture_width, top_Y: window.innerHeight/100*53, bottom_Y: window.innerHeight/100*53 +picture_height, was: 2},
+  {stimulus: "ListPractice/6.bmp", left_X: X_third, right_X: X_third + picture_width, top_Y: Y_second, bottom_Y: Y_second + picture_height, was: 0},
+  {stimulus: "List1/25.bmp", left_X: window.innerWidth/100*56, right_X: window.innerWidth/100*56 + picture_width, top_Y: window.innerHeight/100*20, bottom_Y: window.innerHeight/100*20 +picture_height, was: 2},
+]
+
 // lists for trials
 
 //picture_list:
@@ -68,42 +93,92 @@ for (x=0; x< place_X_order.length; x++){
 }
 console.log(grid_list_order);
 
-let grid_list = jsPsych.randomization.shuffle(grid_list_order);
+//let grid_list = jsPsych.randomization.shuffle(grid_list_order);
 
 let picture_call_order = ["List1/1.bmp", "List1/5.bmp", "List1/7.bmp","List1/8.bmp","List1/9.bmp", "List1/10.bmp", "List1/11.bmp", "List1/13.bmp", "List1/14.bmp", "List1/15.bmp", "List1/16.bmp", "List1/17.bmp", "List1/18.bmp", "List1/19.bmp", "List1/21.bmp", "List1/22.bmp", "List1/23.bmp", "List1/24.bmp", "List1/25.bmp", "List1/26.bmp", "List1/27.bmp", "List1/28.bmp", "List1/29.bmp", "List1/30.bmp", ]
-let picture_call = jsPsych.randomization.shuffle(picture_call_order) //randomizált képlista
+//let picture_call = jsPsych.randomization.shuffle(picture_call_order) //randomizált képlista, ehelyett kell egy előre randomizált lista, ami ugyanaz lesz mindenkinél
 
-let picture_list = []
+let picture_list = [
+  {stimulus: "List1/1.bmp", X: X_fourth, Y: Y_fourth},
+  {stimulus: "List1/2.bmp", X: X_third, Y: Y_fifth},
+  {stimulus: "List1/3.bmp", X: X_third, Y: Y_third},
+  {stimulus: "List1/4.bmp", X: X_fourth, Y: Y_first},
+  {stimulus: "List1/5.bmp", X: X_fifth, Y: Y_third},
+  {stimulus: "List1/6.bmp", X: X_first, Y: Y_first},
+  {stimulus: "List1/7.bmp", X: X_fifth, Y: Y_first},
+  {stimulus: "List1/8.bmp", X: X_second, Y: Y_first},
+  {stimulus: "List1/9.bmp", X: X_fourth, Y: Y_fifth},
+  {stimulus: "List1/10.bmp", X: X_second, Y: Y_third},
+  {stimulus: "List1/11.bmp", X: X_first, Y: Y_second},
+  {stimulus: "List1/13.bmp", X: X_fourth, Y: Y_third},
+  {stimulus: "List1/14.bmp", X: X_third, Y: Y_first},
+  {stimulus: "List1/15.bmp", X: X_first, Y: Y_third},
+  {stimulus: "List1/16.bmp", X: X_second, Y: Y_fifth},
+]
+/*let picture_list = []
 
 function generate_picture_list(arr){
   for (i=0; i<12; i++){
-      onerow = {stimulus: picture_call[i], X: grid_list[i][0], Y: grid_list[i][1]},
+      onerow = {stimulus: picture_call[i], X: grid_list_order[i][0], Y: grid_list_order[i][1]},
       arr.push(onerow)
     } //sorba helyezi az első 12 elemét a képlistának és koordinátalistának és beteszi a picture_list-be
 }  
 
 generate_picture_list(picture_list);
-console.log(picture_list);
+console.log(picture_list); */
 
 // Recall_list: 
 
-let recall_list_order = []
+let recall_list =  [
+  {stimulus: "List1/27.bmp", left_X: X_third, right_X: X_third + picture_width, top_Y: Y_fourth, bottom_Y: Y_fourth + picture_height, was: 2},
+  {stimulus: "List1/15.bmp", left_X: X_first, right_X: X_first + picture_width, top_Y: Y_third, bottom_Y: Y_third + picture_height, was: 0},
+  {stimulus: "List1/26.bmp", left_X: X_third, right_X: X_third + picture_width, top_Y: Y_fourth, bottom_Y: Y_fourth + picture_height, was: 2},
+  {stimulus: "List1/14.bmp", left_X: X_third, right_X: X_third + picture_width, top_Y: Y_first, bottom_Y: Y_first + picture_height, was: 0},
+  {stimulus: "List1/3.bmp", left_X: X_third, right_X: X_third + picture_width, top_Y: Y_third, bottom_Y: Y_third + picture_height, was: 0},
+  {stimulus: "List1/25.bmp", left_X: X_first, right_X: X_first + picture_width, top_Y: Y_fifth, bottom_Y: Y_fifth + picture_height, was: 2},
+  {stimulus: "List1/17.bmp", left_X: X_third, right_X: X_third + picture_width, top_Y: Y_second, bottom_Y: Y_second + picture_height, was: 2},
+  {stimulus: "List1/19.bmp", left_X: X_fifth, right_X: X_fifth + picture_width, top_Y: Y_fourth, bottom_Y: Y_fourth + picture_height, was: 2},
+  {stimulus: "List1/9.bmp", left_X: X_fourth, right_X: X_fourth + picture_width, top_Y: Y_fifth, bottom_Y: Y_fifth + picture_height, was: 0},
+  {stimulus: "List1/21.bmp", left_X: X_third, right_X: X_third + picture_width, top_Y: Y_fourth, bottom_Y: Y_fourth + picture_height, was: 2},
+  {stimulus: "List1/10.bmp", left_X: X_second, right_X: X_second + picture_width, top_Y: Y_third, bottom_Y: Y_third + picture_height, was: 0},
+  {stimulus: "List1/8.bmp", left_X: X_second, right_X: X_second + picture_width, top_Y: Y_first, bottom_Y: Y_first + picture_height, was: 0},
+  {stimulus: "List1/28.bmp", left_X: X_third, right_X: X_third + picture_width, top_Y: Y_fourth, bottom_Y: Y_fourth + picture_height, was: 2},
+  {stimulus: "List1/23.bmp", left_X: X_fourth, right_X: X_fourth + picture_width, top_Y: Y_second, bottom_Y: Y_second + picture_height, was: 2},
+  {stimulus: "List1/11.bmp", left_X: X_first, right_X: X_first + picture_width, top_Y: Y_second, bottom_Y: Y_second + picture_height, was: 0},
+  {stimulus: "List1/5.bmp", left_X: X_fifth, right_X: X_fifth + picture_width, top_Y: Y_third, bottom_Y: Y_third + picture_height, was: 0},
+  {stimulus: "List1/20.bmp", left_X: X_first, right_X: X_first + picture_width, top_Y: Y_fourth, bottom_Y: Y_fourth + picture_height, was: 2},
+  {stimulus: "List1/29.bmp", left_X: X_third, right_X: X_third + picture_width, top_Y: Y_fourth, bottom_Y: Y_fourth + picture_height, was: 2},
+  {stimulus: "List1/7.bmp", left_X: X_fifth, right_X: X_fifth + picture_width, top_Y: Y_first, bottom_Y: Y_first + picture_height, was: 0},
+  {stimulus: "List1/16.bmp", left_X: X_second, right_X: X_second + picture_width, top_Y: Y_fifth, bottom_Y: Y_fifth + picture_height, was: 0},
+  {stimulus: "List1/22.bmp", left_X: X_fifth, right_X: X_fifth + picture_width, top_Y: Y_second, bottom_Y: Y_second + picture_height, was: 2},
+  {stimulus: "List1/6.bmp", left_X: X_first, right_X: X_first + picture_width, top_Y: Y_first, bottom_Y: Y_first + picture_height, was: 0},
+  {stimulus: "List1/1.bmp", left_X: X_fourth, right_X: X_fourth + picture_width, top_Y: Y_fourth, bottom_Y: Y_fourth + picture_height, was: 0},
+  {stimulus: "List1/24.bmp", left_X: X_fifth, right_X: X_fifth + picture_width, top_Y: Y_fifth, bottom_Y: Y_fifth + picture_height, was: 2},
+  {stimulus: "List1/30.bmp", left_X: X_third, right_X: X_third + picture_width, top_Y: Y_fourth, bottom_Y: Y_fourth + picture_height, was: 2},
+  {stimulus: "List1/2.bmp", left_X: X_third, right_X: X_third + picture_width, top_Y: Y_fifth, bottom_Y: Y_fifth + picture_height, was: 0},
+  {stimulus: "List1/13.bmp", left_X: X_fourth, right_X: X_fourth + picture_width, top_Y: Y_third, bottom_Y: Y_third + picture_height, was: 0},
+  {stimulus: "List1/4.bmp", left_X: X_fourth, right_X: X_fourth + picture_width, top_Y: Y_first, bottom_Y: Y_first + picture_height, was: 0},
+  {stimulus: "List1/18.bmp", left_X: X_second, right_X: X_second + picture_width, top_Y: Y_fourth, bottom_Y: Y_fourth + picture_height, was: 2},
+  {stimulus: "List1/12.bmp", left_X: X_third, right_X: X_third + picture_width, top_Y: Y_fourth, bottom_Y: Y_fourth + picture_height, was: 2},
+]
       
+/*
+let recall_list = []
 function generate_recall_list(array){
-  for (i=0; i<24; i++){
-    if (i<12){
-      onerow = {stimulus: picture_call[i], left_X: grid_list[i][0], right_X: grid_list[i][0] + picture_width, top_Y: grid_list[i][1], bottom_Y: grid_list[i][1] + picture_height, was: 0},
+  for (i=0; i<30; i++){
+    if (i<15){
+      onerow = {stimulus: picture_call_order[i], left_X: grid_list[i][0], right_X: grid_list[i][0] + picture_width, top_Y: grid_list[i][1], bottom_Y: grid_list[i][1] + picture_height, was: 0},
       array.push(onerow);
     }
     else{
-      onerow = {stimulus: picture_call[i], left_X: grid_list[i][0], right_X: grid_list[i][0] + picture_width, top_Y: grid_list[i][1], bottom_Y: grid_list[i][1] + picture_height, was: 2},
+      onerow = {stimulus: picture_call_order[i], left_X: grid_list[i][0], right_X: grid_list[i][0] + picture_width, top_Y: grid_list[i][1], bottom_Y: grid_list[i][1] + picture_height, was: 2},
       array.push(onerow);
     }
   }
 }
-generate_recall_list(recall_list_order);
-let recall_list =  jsPsych.randomization.shuffle(recall_list_order);
-console.log(recall_list);
+generate_recall_list(recall_list);
+//let recall_list =  jsPsych.randomization.shuffle(recall_list_order); RANDOM LISTA GENERÁLÁSHOZ VALÓ KÓD, NEM HASZNÁLJUK
+console.log(recall_list); */
 
     //Drawing objects
     var gray = {
@@ -214,6 +289,13 @@ console.log(recall_list);
       button_label_next: 'Folytatás',
       allow_backward: false,
     }
+    var trial_instruction4 = {
+      type: 'instructions',
+      pages: ['<p style="color:' + text_color + '">Most még egy kör gyakorlás következik. Ha készen áll, nyomja meg a "Folytatás" gombot. </p>'],
+      show_clickable_nav: true,
+      button_label_next: 'Folytatás',
+      allow_backward: false,
+    }
 
     var trial_memorise = {
         type: 'psychophysics',
@@ -285,14 +367,23 @@ console.log(recall_list);
 
     //Trial blocks
 
-    var trials_practice_memorize = {
+    var trials_practice_memorize_1 = {
       timeline: [trial_memorise],
-      timeline_variables: practice_picture_list,
+      timeline_variables: practice_picture_list_1,
     }
    
-    var trials_practice_recall = {
+    var trials_practice_recall_1 = {
       timeline: [trial_recall, if_node],
-      timeline_variables: practice_recall_list,
+      timeline_variables: practice_recall_list_1,
+    }
+    var trials_practice_memorize_2 = {
+      timeline: [trial_memorise],
+      timeline_variables: practice_picture_list_1,
+    }
+   
+    var trials_practice_recall_2 = {
+      timeline: [trial_recall, if_node],
+      timeline_variables: practice_recall_list_2,
     }
 
     var trials_memorise = {
@@ -312,7 +403,7 @@ console.log(recall_list);
     };
 
     var consented = {
-      timeline: [fullscreen, trial_instruction1, trials_practice_memorize, trial_instruction2, trials_practice_recall, trial_instruction3, trials_memorise, trials_recall, trial_feedback, fullscreen_end, rip],
+      timeline: [fullscreen, trial_instruction1, trials_practice_memorize_1, trial_instruction2, trials_practice_recall_1, trial_instruction4, trials_practice_memorize_2, trial_instruction2, trials_practice_recall_2, trial_instruction3, trials_memorise, trials_recall, trial_feedback, fullscreen_end, rip],
       conditional_function: function(){
         var data = jsPsych.data.get().last(1).values()[0];
         if (data.response['Consent'] == "Elfogadom"){
