@@ -47,6 +47,7 @@ var Y_fourth = window.innerHeight/100*65.71
 var Y_fifth = window.innerHeight/100*81.42
 
 //lists for practice
+let all_images = ["ListPractice/1.bmp", "ListPractice/2.bmp", "ListPractice/3.bmp", "ListPractice/4.bmp", "ListPractice/5.bmp", "ListPractice/6.bmp", "List1/1.bmp", "List1/5.bmp", "List1/7.bmp","List1/8.bmp","List1/9.bmp", "List1/10.bmp", "List1/11.bmp", "List1/13.bmp", "List1/14.bmp", "List1/15.bmp", "List1/16.bmp", "List1/17.bmp", "List1/18.bmp", "List1/19.bmp", "List1/21.bmp", "List1/22.bmp", "List1/23.bmp", "List1/24.bmp", "List1/25.bmp", "List1/26.bmp", "List1/27.bmp", "List1/28.bmp", "List1/29.bmp", "List1/30.bmp"];
 
 let practice_picture_list_1 = [
   {stimulus: "ListPractice/2.bmp", X: X_second, Y: Y_fourth},
@@ -180,6 +181,22 @@ generate_recall_list(recall_list);
 //let recall_list =  jsPsych.randomization.shuffle(recall_list_order); RANDOM LISTA GENERÁLÁSHOZ VALÓ KÓD, NEM HASZNÁLJUK
 console.log(recall_list); */
 
+//Preload pictures
+var images = all_images;
+var n_loaded = 0;
+
+jsPsych.pluginAPI.preloadImages(images, function(){ startExperiment(); }, function(file) { updateLoadedCount(file); });
+
+function updateLoadedCount(file){
+  n_loaded++;
+    var percentcomplete = n_loaded / images.length * 100;
+
+    // could put something fancier here, like a progress bar
+    // or updating text in the DOM.
+    console.log('Loaded '+percentcomplete+'% of images');
+}
+
+
     //Drawing objects
     var gray = {
       obj_type: 'image',
@@ -300,6 +317,7 @@ console.log(recall_list); */
     }
 
     var trial_memorise = {
+
         type: 'psychophysics',
         stimuli: [gray, img_memorise],
         background_color: 'black',
@@ -412,7 +430,7 @@ console.log(recall_list); */
 
     timeline.push(fullscreen);
     timeline.push(consent);
-    timeline.push(preload)
+    //timeline.push(preload)
 
     var consented = {
       timeline: [trial_instruction1, trials_practice_memorize_1, trial_instruction2, trials_practice_recall_1, trial_instruction4, trials_practice_memorize_2, trial_instruction2, trials_practice_recall_2, trial_instruction3, trials_memorise, trials_recall, trial_feedback, fullscreen_end, rip],
@@ -443,11 +461,20 @@ console.log(recall_list); */
 
     //timeline.push(fullscreen_end)
     console.log(timeline)
-    jsPsych.init({
+    function startExperiment(){
+      jsPsych.init({
         timeline: timeline,
         use_webaudio: 'false', 
         override_safe_mode: 'true',
         //on_finish: function(){jsPsych.data.displayData();}
-    });
+      });
+    }
+
+    /*jsPsych.init({
+        timeline: timeline,
+        use_webaudio: 'false', 
+        override_safe_mode: 'true',
+        //on_finish: function(){jsPsych.data.displayData();}
+    });*/
 </script>
 </html>
