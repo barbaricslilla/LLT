@@ -436,7 +436,7 @@ function updateLoadedCount(file){
       timeline: [trial_instruction1, trials_practice_memorize_1, trial_instruction2, trials_practice_recall_1, trial_instruction4, trials_practice_memorize_2, trial_instruction2, trials_practice_recall_2, trial_instruction3, trials_memorise, trials_recall, trial_feedback, fullscreen_end, rip],
       conditional_function: function(){
         var data = jsPsych.data.get().last(1).values()[0];
-        if (data.responses == '{"Consent":"Elfogadom"}'){
+        if (data.response.Consent == 'Elfogadom'){
           return true;
         } else {
           return false;
@@ -449,7 +449,7 @@ function updateLoadedCount(file){
       timeline: [rip],
       conditional_function: function(){
         var data = jsPsych.data.get().last(1).values()[0];
-        if (data.responses == '{"Consent":"Nem fogadom el"}'){
+        if (data.response.Consent == "Nem fogadom el"){
           return true;
         } else {
           return false;
