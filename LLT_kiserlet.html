@@ -57,12 +57,12 @@ let practice_picture_list_1 = [
 ]
 
 let practice_recall_list_1 = [
-  {stimulus: "List1/28.bmp", left_X: window.innerWidth/100*49, right_X: window.innerWidth/100*49 + picture_width, top_Y: window.innerHeight/100*53, bottom_Y: window.innerHeight/100*53 +picture_height, was: 2},
+  {stimulus: "List1/28.bmp", left_X: window.innerWidth/100*49, right_X: window.innerWidth/100*49 + picture_width, top_Y: window.innerHeight/100*53, bottom_Y: window.innerHeight/100*53 +picture_height, was: 1},
   {stimulus: "ListPractice/4.bmp", left_X: X_first, right_X: X_first + picture_width, top_Y: Y_third, bottom_Y: Y_third + picture_height, was: 0},
   {stimulus: "ListPractice/2.bmp", left_X: X_second, right_X: X_second + picture_width, top_Y: Y_fourth, bottom_Y: Y_fourth + picture_height, was: 0},
-  {stimulus: "List1/29.bmp", left_X: window.innerWidth/100*42, right_X: window.innerWidth/100*42 + picture_width, top_Y: window.innerHeight/100*53, bottom_Y: window.innerHeight/100*53 +picture_height, was: 2},
+  {stimulus: "List1/29.bmp", left_X: window.innerWidth/100*42, right_X: window.innerWidth/100*42 + picture_width, top_Y: window.innerHeight/100*53, bottom_Y: window.innerHeight/100*53 +picture_height, was: 1},
   {stimulus: "ListPractice/3.bmp", left_X: X_fifth, right_X: X_fifth + picture_width, top_Y: Y_second, bottom_Y: Y_second + picture_height, was: 0},
-  {stimulus: "List1/30.bmp", left_X: window.innerWidth/100*56, right_X: window.innerWidth/100*56 + picture_width, top_Y: window.innerHeight/100*20, bottom_Y: window.innerHeight/100*20 +picture_height, was: 2},
+  {stimulus: "List1/30.bmp", left_X: window.innerWidth/100*56, right_X: window.innerWidth/100*56 + picture_width, top_Y: window.innerHeight/100*20, bottom_Y: window.innerHeight/100*20 +picture_height, was: 1},
 ] 
 
 let practice_picture_list_2 = [
@@ -71,12 +71,12 @@ let practice_picture_list_2 = [
   {stimulus: "ListPractice/6.bmp", X: X_third, Y: Y_second},
 ]
 let practice_recall_list_2 = [
-  {stimulus: "List1/27.bmp", left_X: window.innerWidth/100*49, right_X: window.innerWidth/100*49 + picture_width, top_Y: window.innerHeight/100*53, bottom_Y: window.innerHeight/100*53 +picture_height, was: 2},
+  {stimulus: "List1/27.bmp", left_X: window.innerWidth/100*49, right_X: window.innerWidth/100*49 + picture_width, top_Y: window.innerHeight/100*53, bottom_Y: window.innerHeight/100*53 +picture_height, was: 1},
   {stimulus: "ListPractice/5.bmp", left_X: X_fourth, right_X: X_fourth + picture_width, top_Y: Y_first, bottom_Y: Y_first + picture_height, was: 0},
   {stimulus: "ListPractice/1.bmp", left_X: X_fourth, right_X: X_fourth + picture_width, top_Y: Y_fourth, bottom_Y: Y_fourth + picture_height, was: 0},
-  {stimulus: "List1/26.bmp", left_X: window.innerWidth/100*42, right_X: window.innerWidth/100*42 + picture_width, top_Y: window.innerHeight/100*53, bottom_Y: window.innerHeight/100*53 +picture_height, was: 2},
+  {stimulus: "List1/26.bmp", left_X: window.innerWidth/100*42, right_X: window.innerWidth/100*42 + picture_width, top_Y: window.innerHeight/100*53, bottom_Y: window.innerHeight/100*53 +picture_height, was: 1},
   {stimulus: "ListPractice/6.bmp", left_X: X_third, right_X: X_third + picture_width, top_Y: Y_second, bottom_Y: Y_second + picture_height, was: 0},
-  {stimulus: "List1/25.bmp", left_X: window.innerWidth/100*56, right_X: window.innerWidth/100*56 + picture_width, top_Y: window.innerHeight/100*20, bottom_Y: window.innerHeight/100*20 +picture_height, was: 2},
+  {stimulus: "List1/25.bmp", left_X: window.innerWidth/100*56, right_X: window.innerWidth/100*56 + picture_width, top_Y: window.innerHeight/100*20, bottom_Y: window.innerHeight/100*20 +picture_height, was: 1},
 ]
 
 // lists for trials
@@ -330,12 +330,16 @@ console.log(recall_list); */
         vert_button_margin: '0px',
         horiz_button_margin: '100px',
         response_start_time: 0,
+        //trial_duration: 30000,
         data: {type: 'trial_recall'},
         on_finish: function(data){
-          data.button_press = event.button;
+          //if (data.button_press)
+          //data.button_press = event.button;
           data.correct_response = jsPsych.timelineVariable('was', true)
-          data.correct = data.mouse_press == data.correct_response
+          data.correct = data.button_pressed == data.correct_response
           data.correct_recall = data.correct;
+          console.log(data)
+
         }
     }
 
@@ -346,6 +350,7 @@ console.log(recall_list); */
         background_color: 'black',
         response_type: 'mouse',
         response_start_time: 0,
+        trial_duration: 30000,
         data: {type: 'trial_position'},
         on_finish: function(data){
           data.positionLeft = jsPsych.timelineVariable('left_X', true);
