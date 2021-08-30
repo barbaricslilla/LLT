@@ -30,28 +30,34 @@ var text_color = "white"
 
 var timeline = []
 
-var picture_width = window.innerWidth/100*9.75
-//console.log(window.innerHeight)
-var picture_height = window.innerHeight/100*15
+//Picture size
+var picture_width = window.innerWidth/100*7
+var picture_height = window.innerHeight/100*12
 
-// coordinates for easy adjustment
-var X_first = window.innerWidth/100*30
-var X_second = window.innerWidth/100*40
-var X_third = window.innerWidth/100*50
-var X_fourth = window.innerWidth/100*60
-var X_fifth =  window.innerWidth/100*70
-var Y_first = window.innerHeight/100*18.58
-var Y_second = window.innerHeight/100*34.29
-var Y_third = window.innerHeight/100*50
-var Y_fourth = window.innerHeight/100*65.71
-var Y_fifth = window.innerHeight/100*81.42
+//Coordinates for easy adjustment
+var space_horizontal = 1 //Horizontal spacing between pictures
+var space_vertical = 1 //Vertical spacing betweem pictures
+
+var X_first = window.innerWidth/100*25
+var X_second = X_first + picture_width + space_horizontal
+var X_third = X_second + picture_width + space_horizontal
+var X_fourth = X_third + picture_width + space_horizontal
+var X_fifth = X_fourth + picture_width + space_horizontal
+var X_sixth = X_fifth + picture_width + space_horizontal
+
+var Y_first = window.innerHeight/100*20
+var Y_second = Y_first + picture_height + space_vertical
+var Y_third = Y_second + picture_height + space_vertical
+var Y_fourth = Y_third + picture_height + space_vertical
+var Y_fifth = Y_fourth + picture_height + space_vertical
+var Y_sixth = Y_fifth + picture_height + space_vertical
 
 //List for preloading
 let all_images = ["ListPractice/1.bmp", "ListPractice/2.bmp", "ListPractice/3.bmp", "ListPractice/4.bmp", "ListPractice/5.bmp", "ListPractice/6.bmp", "List1/1.bmp", "List1/5.bmp", "List1/7.bmp","List1/8.bmp","List1/9.bmp", "List1/10.bmp", "List1/11.bmp", "List1/13.bmp", "List1/14.bmp", "List1/15.bmp", "List1/16.bmp", "List1/17.bmp", "List1/18.bmp", "List1/19.bmp", "List1/21.bmp", "List1/22.bmp", "List1/23.bmp", "List1/24.bmp", "List1/25.bmp", "List1/26.bmp", "List1/27.bmp", "List1/28.bmp", "List1/29.bmp", "List1/30.bmp"];
 
 //lists for practice
 let practice_picture_list_1 = [
-  {stimulus: "ListPractice/2.bmp", X: X_second, Y: Y_fourth},
+  {stimulus: "ListPractice/2.bmp", X: X_second, Y: Y_sixth}, //Y_fourth
   {stimulus: "ListPractice/3.bmp", X: X_fifth, Y: Y_second},
   {stimulus: "ListPractice/4.bmp", X: X_first, Y: Y_third},
 ]
@@ -83,17 +89,19 @@ let practice_recall_list_2 = [
 
 //picture_list:
 
-let place_X_order = [window.innerWidth/100*30, window.innerWidth/100*40, window.innerWidth/100*50, window.innerWidth/100*60, window.innerWidth/100*70];
-let place_Y_order = [window.innerHeight/100*18.58, window.innerHeight/100*34.29, window.innerHeight/100*50, window.innerHeight/100*65.71, window.innerHeight/100*81.42];
+//let place_X_order = [window.innerWidth/100*30, window.innerWidth/100*40, window.innerWidth/100*50, window.innerWidth/100*60, window.innerWidth/100*70];
+//let place_Y_order = [window.innerHeight/100*18.58, window.innerHeight/100*34.29, window.innerHeight/100*50, window.innerHeight/100*65.71, window.innerHeight/100*81.42];
+let place_X_order = [X_first, X_second, X_third, X_fourth, X_fifth, X_sixth]
+let place_Y_order = [Y_first, Y_second, Y_third, Y_fourth, Y_fifth, Y_sixth]
 
 let grid_list_order = []; //rács koordináták listája
 
 for (x=0; x< place_X_order.length; x++){
   for (y=0; y<place_Y_order.length; y++){
     grid_list_order.push([place_X_order[x], place_Y_order[y]]);
-  } //25 elemű lista, amely tartalmazza a koordináta párokat
+  } //36 elemű lista, amely tartalmazza a koordináta párokat
 }
-//console.log(grid_list_order);
+console.log(grid_list_order);
 
 //let grid_list = jsPsych.randomization.shuffle(grid_list_order);
 
@@ -115,7 +123,7 @@ let picture_list = [
   {stimulus: "List1/13.bmp", X: X_fourth, Y: Y_third},
   {stimulus: "List1/14.bmp", X: X_third, Y: Y_first},
   {stimulus: "List1/15.bmp", X: X_first, Y: Y_third},
-  {stimulus: "List1/16.bmp", X: X_second, Y: Y_fifth},
+  //{stimulus: "List1/16.bmp", X: X_second, Y: Y_fifth},
 ]
 /*let picture_list = []
 
@@ -132,36 +140,36 @@ console.log(picture_list); */
 // Recall_list: 
 
 let recall_list =  [
-  {stimulus: "List1/27.bmp", left_X: X_third, right_X: X_third + picture_width, top_Y: Y_fourth, bottom_Y: Y_fourth + picture_height, was: 2},
+  {stimulus: "List1/27.bmp", left_X: X_third, right_X: X_third + picture_width, top_Y: Y_fourth, bottom_Y: Y_fourth + picture_height, was: 1},
   {stimulus: "List1/15.bmp", left_X: X_first, right_X: X_first + picture_width, top_Y: Y_third, bottom_Y: Y_third + picture_height, was: 0},
-  {stimulus: "List1/26.bmp", left_X: X_third, right_X: X_third + picture_width, top_Y: Y_fourth, bottom_Y: Y_fourth + picture_height, was: 2},
+  {stimulus: "List1/26.bmp", left_X: X_third, right_X: X_third + picture_width, top_Y: Y_fourth, bottom_Y: Y_fourth + picture_height, was: 1},
   {stimulus: "List1/14.bmp", left_X: X_third, right_X: X_third + picture_width, top_Y: Y_first, bottom_Y: Y_first + picture_height, was: 0},
   {stimulus: "List1/3.bmp", left_X: X_third, right_X: X_third + picture_width, top_Y: Y_third, bottom_Y: Y_third + picture_height, was: 0},
-  {stimulus: "List1/25.bmp", left_X: X_first, right_X: X_first + picture_width, top_Y: Y_fifth, bottom_Y: Y_fifth + picture_height, was: 2},
-  {stimulus: "List1/17.bmp", left_X: X_third, right_X: X_third + picture_width, top_Y: Y_second, bottom_Y: Y_second + picture_height, was: 2},
-  {stimulus: "List1/19.bmp", left_X: X_fifth, right_X: X_fifth + picture_width, top_Y: Y_fourth, bottom_Y: Y_fourth + picture_height, was: 2},
+  {stimulus: "List1/25.bmp", left_X: X_first, right_X: X_first + picture_width, top_Y: Y_fifth, bottom_Y: Y_fifth + picture_height, was: 1},
+  {stimulus: "List1/17.bmp", left_X: X_third, right_X: X_third + picture_width, top_Y: Y_second, bottom_Y: Y_second + picture_height, was: 1},
+  {stimulus: "List1/19.bmp", left_X: X_fifth, right_X: X_fifth + picture_width, top_Y: Y_fourth, bottom_Y: Y_fourth + picture_height, was: 1},
   {stimulus: "List1/9.bmp", left_X: X_fourth, right_X: X_fourth + picture_width, top_Y: Y_fifth, bottom_Y: Y_fifth + picture_height, was: 0},
-  {stimulus: "List1/21.bmp", left_X: X_third, right_X: X_third + picture_width, top_Y: Y_fourth, bottom_Y: Y_fourth + picture_height, was: 2},
+  {stimulus: "List1/21.bmp", left_X: X_third, right_X: X_third + picture_width, top_Y: Y_fourth, bottom_Y: Y_fourth + picture_height, was: 1},
   {stimulus: "List1/10.bmp", left_X: X_second, right_X: X_second + picture_width, top_Y: Y_third, bottom_Y: Y_third + picture_height, was: 0},
   {stimulus: "List1/8.bmp", left_X: X_second, right_X: X_second + picture_width, top_Y: Y_first, bottom_Y: Y_first + picture_height, was: 0},
-  {stimulus: "List1/28.bmp", left_X: X_third, right_X: X_third + picture_width, top_Y: Y_fourth, bottom_Y: Y_fourth + picture_height, was: 2},
-  {stimulus: "List1/23.bmp", left_X: X_fourth, right_X: X_fourth + picture_width, top_Y: Y_second, bottom_Y: Y_second + picture_height, was: 2},
+  {stimulus: "List1/28.bmp", left_X: X_third, right_X: X_third + picture_width, top_Y: Y_fourth, bottom_Y: Y_fourth + picture_height, was: 1},
+  {stimulus: "List1/23.bmp", left_X: X_fourth, right_X: X_fourth + picture_width, top_Y: Y_second, bottom_Y: Y_second + picture_height, was: 1},
   {stimulus: "List1/11.bmp", left_X: X_first, right_X: X_first + picture_width, top_Y: Y_second, bottom_Y: Y_second + picture_height, was: 0},
   {stimulus: "List1/5.bmp", left_X: X_fifth, right_X: X_fifth + picture_width, top_Y: Y_third, bottom_Y: Y_third + picture_height, was: 0},
-  {stimulus: "List1/20.bmp", left_X: X_first, right_X: X_first + picture_width, top_Y: Y_fourth, bottom_Y: Y_fourth + picture_height, was: 2},
-  {stimulus: "List1/29.bmp", left_X: X_third, right_X: X_third + picture_width, top_Y: Y_fourth, bottom_Y: Y_fourth + picture_height, was: 2},
+  {stimulus: "List1/20.bmp", left_X: X_first, right_X: X_first + picture_width, top_Y: Y_fourth, bottom_Y: Y_fourth + picture_height, was: 1},
+  {stimulus: "List1/29.bmp", left_X: X_third, right_X: X_third + picture_width, top_Y: Y_fourth, bottom_Y: Y_fourth + picture_height, was: 1},
   {stimulus: "List1/7.bmp", left_X: X_fifth, right_X: X_fifth + picture_width, top_Y: Y_first, bottom_Y: Y_first + picture_height, was: 0},
-  {stimulus: "List1/16.bmp", left_X: X_second, right_X: X_second + picture_width, top_Y: Y_fifth, bottom_Y: Y_fifth + picture_height, was: 0},
-  {stimulus: "List1/22.bmp", left_X: X_fifth, right_X: X_fifth + picture_width, top_Y: Y_second, bottom_Y: Y_second + picture_height, was: 2},
+  {stimulus: "List1/16.bmp", left_X: X_second, right_X: X_second + picture_width, top_Y: Y_fifth, bottom_Y: Y_fifth + picture_height, was: 1},
+  {stimulus: "List1/22.bmp", left_X: X_fifth, right_X: X_fifth + picture_width, top_Y: Y_second, bottom_Y: Y_second + picture_height, was: 1},
   {stimulus: "List1/6.bmp", left_X: X_first, right_X: X_first + picture_width, top_Y: Y_first, bottom_Y: Y_first + picture_height, was: 0},
   {stimulus: "List1/1.bmp", left_X: X_fourth, right_X: X_fourth + picture_width, top_Y: Y_fourth, bottom_Y: Y_fourth + picture_height, was: 0},
-  {stimulus: "List1/24.bmp", left_X: X_fifth, right_X: X_fifth + picture_width, top_Y: Y_fifth, bottom_Y: Y_fifth + picture_height, was: 2},
-  {stimulus: "List1/30.bmp", left_X: X_third, right_X: X_third + picture_width, top_Y: Y_fourth, bottom_Y: Y_fourth + picture_height, was: 2},
+  {stimulus: "List1/24.bmp", left_X: X_fifth, right_X: X_fifth + picture_width, top_Y: Y_fifth, bottom_Y: Y_fifth + picture_height, was: 1},
+  {stimulus: "List1/30.bmp", left_X: X_third, right_X: X_third + picture_width, top_Y: Y_fourth, bottom_Y: Y_fourth + picture_height, was: 1},
   {stimulus: "List1/2.bmp", left_X: X_third, right_X: X_third + picture_width, top_Y: Y_fifth, bottom_Y: Y_fifth + picture_height, was: 0},
   {stimulus: "List1/13.bmp", left_X: X_fourth, right_X: X_fourth + picture_width, top_Y: Y_third, bottom_Y: Y_third + picture_height, was: 0},
   {stimulus: "List1/4.bmp", left_X: X_fourth, right_X: X_fourth + picture_width, top_Y: Y_first, bottom_Y: Y_first + picture_height, was: 0},
-  {stimulus: "List1/18.bmp", left_X: X_second, right_X: X_second + picture_width, top_Y: Y_fourth, bottom_Y: Y_fourth + picture_height, was: 2},
-  {stimulus: "List1/12.bmp", left_X: X_third, right_X: X_third + picture_width, top_Y: Y_fourth, bottom_Y: Y_fourth + picture_height, was: 2},
+  {stimulus: "List1/18.bmp", left_X: X_second, right_X: X_second + picture_width, top_Y: Y_fourth, bottom_Y: Y_fourth + picture_height, was: 1},
+  {stimulus: "List1/12.bmp", left_X: X_third, right_X: X_third + picture_width, top_Y: Y_fourth, bottom_Y: Y_fourth + picture_height, was: 1},
 ]
       
 /*
@@ -187,8 +195,7 @@ console.log(recall_list); */
       obj_type: 'image',
       file: 'gray_square.bmp',
       drawFunc: function(stimulus, canvas, context){
-        //console.log(window.innerHeight)
-        for (i=0; i<25; i++){
+        for (i=0; i<grid_list_order.length; i++){
           context.drawImage(stimulus.img, grid_list_order[i][0], grid_list_order[i][1], picture_width, picture_height)
         } 
       }
@@ -207,7 +214,7 @@ console.log(recall_list); */
         obj_type: 'image',
         file: jsPsych.timelineVariable('stimulus'),
         drawFunc: function(stimulus, canvas, context){
-            context.drawImage(stimulus.img, window.innerWidth/100*30, window.innerHeight/100*2, picture_width, picture_height);
+            context.drawImage(stimulus.img, X_first, Y_first*0.2, picture_width, picture_height);
         }
     }
     
@@ -216,7 +223,7 @@ console.log(recall_list); */
       drawFunc: function(stimulus, canvas, context){
         context.fillStyle=text_color;
         context.font='52px serif';
-        context.fillText('Látta már ezt a képet?', window.innerWidth/100*41.5, window.innerHeight/100*10);
+        context.fillText('Látta már ezt a képet?', X_second + picture_width*0.5, Y_first*0.6);
       }
     };
 
@@ -225,7 +232,7 @@ console.log(recall_list); */
       drawFunc: function(stimulus, canvas, context){
         context.fillStyle=text_color;
         context.font='52px serif';
-        context.fillText('Hol látta?', window.innerWidth/100*41.5, window.innerHeight/100*10);
+        context.fillText('Hol látta?',  X_second + picture_width*0.5, Y_first*0.6);
       }
     };
 
@@ -318,6 +325,7 @@ console.log(recall_list); */
         response_start_time: 0,
         data: {type: 'trial_memorise'},
         trial_duration: 3000,
+        canvas_offsetY: 0,
     }
 
     var trial_recall = {
@@ -330,7 +338,7 @@ console.log(recall_list); */
         vert_button_margin: '0px',
         horiz_button_margin: '100px',
         response_start_time: 0,
-        //trial_duration: 30000,
+        trial_duration: 30000,
         data: {type: 'trial_recall'},
         on_finish: function(data){
           //if (data.button_press)
@@ -428,7 +436,7 @@ console.log(recall_list); */
     }
 
     //timeline.push(preload)
-    timeline.push(fullscreen);
+    //timeline.push(fullscreen);
     timeline.push(consent);
     //timeline.push(preload)
 
