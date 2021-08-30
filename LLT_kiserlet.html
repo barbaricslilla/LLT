@@ -31,7 +31,7 @@ var text_color = "white"
 var timeline = []
 
 var picture_width = window.innerWidth/100*9.75
-console.log(window.innerHeight)
+//console.log(window.innerHeight)
 var picture_height = window.innerHeight/100*15
 
 // coordinates for easy adjustment
@@ -46,9 +46,10 @@ var Y_third = window.innerHeight/100*50
 var Y_fourth = window.innerHeight/100*65.71
 var Y_fifth = window.innerHeight/100*81.42
 
-//lists for practice
+//List for preloading
 let all_images = ["ListPractice/1.bmp", "ListPractice/2.bmp", "ListPractice/3.bmp", "ListPractice/4.bmp", "ListPractice/5.bmp", "ListPractice/6.bmp", "List1/1.bmp", "List1/5.bmp", "List1/7.bmp","List1/8.bmp","List1/9.bmp", "List1/10.bmp", "List1/11.bmp", "List1/13.bmp", "List1/14.bmp", "List1/15.bmp", "List1/16.bmp", "List1/17.bmp", "List1/18.bmp", "List1/19.bmp", "List1/21.bmp", "List1/22.bmp", "List1/23.bmp", "List1/24.bmp", "List1/25.bmp", "List1/26.bmp", "List1/27.bmp", "List1/28.bmp", "List1/29.bmp", "List1/30.bmp"];
 
+//lists for practice
 let practice_picture_list_1 = [
   {stimulus: "ListPractice/2.bmp", X: X_second, Y: Y_fourth},
   {stimulus: "ListPractice/3.bmp", X: X_fifth, Y: Y_second},
@@ -92,7 +93,7 @@ for (x=0; x< place_X_order.length; x++){
     grid_list_order.push([place_X_order[x], place_Y_order[y]]);
   } //25 elemű lista, amely tartalmazza a koordináta párokat
 }
-console.log(grid_list_order);
+//console.log(grid_list_order);
 
 //let grid_list = jsPsych.randomization.shuffle(grid_list_order);
 
@@ -181,22 +182,6 @@ generate_recall_list(recall_list);
 //let recall_list =  jsPsych.randomization.shuffle(recall_list_order); RANDOM LISTA GENERÁLÁSHOZ VALÓ KÓD, NEM HASZNÁLJUK
 console.log(recall_list); */
 
-//Preload pictures
-var images = all_images;
-var n_loaded = 0;
-
-jsPsych.pluginAPI.preloadImages(images, function(){ startExperiment(); }, function(file) { updateLoadedCount(file); });
-
-function updateLoadedCount(file){
-  n_loaded++;
-    var percentcomplete = n_loaded / images.length * 100;
-
-    // could put something fancier here, like a progress bar
-    // or updating text in the DOM.
-    console.log('Loaded '+percentcomplete+'% of images');
-}
-
-
     //Drawing objects
     var gray = {
       obj_type: 'image',
@@ -255,9 +240,9 @@ function updateLoadedCount(file){
     var text_feedback = {
       obj_type: 'manual',
       drawFunc: function(stimulus, canvas, context){
-        x = jsPsych.data.get().filter({correct_position: true}).count();
-        context.fillStyle=text_color;
-        context.font='32px serif';
+        x = jsPsych.data.getLastTimelineData().filter({correct_position: true}).count();
+        context.fillStyle = text_color;
+        context.font = '32px serif';
         context.fillText('Helyes válaszok száma: '+x, window.innerWidth/100*40, window.innerHeight/100*50);
       }
     }
@@ -330,7 +315,7 @@ function updateLoadedCount(file){
     var trial_recall = {
         type: 'psychophysics',
         stimuli: [gray, img_recall, text_seen],
-        canvas_height: window.innerHeight*0.8, //Modify this to position the buttons
+        canvas_height: window.innerHeight*1, //Modify this to position the buttons
         background_color: 'black',
         response_type: 'button',
         button_choices: ['Láttam', 'Nem láttam'],
@@ -349,7 +334,7 @@ function updateLoadedCount(file){
     var trial_position = {
         type: 'psychophysics',
         stimuli: [gray, img_recall, text_where],
-        canvas_height: window.innerHeight*0.8,
+        canvas_height: window.innerHeight*1,
         background_color: 'black',
         response_type: 'mouse',
         response_start_time: 0,
@@ -425,15 +410,17 @@ function updateLoadedCount(file){
     var preload = {
       type: 'preload',
       auto_preload: true,
-      images: picture_call_order,
+      images: all_images,
+      show_progress_bar: true,
     }
 
+    //timeline.push(preload)
     timeline.push(fullscreen);
     timeline.push(consent);
     //timeline.push(preload)
 
     var consented = {
-      timeline: [trial_instruction1, trials_practice_memorize_1, trial_instruction2, trials_practice_recall_1, trial_instruction4, trials_practice_memorize_2, trial_instruction2, trials_practice_recall_2, trial_instruction3, trials_memorise, trials_recall, trial_feedback, fullscreen_end, rip],
+      timeline: [trial_instruction1, trials_practice_memorize_1, trial_instruction2, trials_practice_recall_1, trial_feedback, trial_instruction4, trials_practice_memorize_2, trial_instruction2, trials_practice_recall_2, trial_feedback, trial_instruction3, trials_memorise, trials_recall, trial_feedback, fullscreen_end, rip],
       conditional_function: function(){
         var data = jsPsych.data.get().last(1).values()[0];
         if (data.response.Consent == 'Elfogadom'){
@@ -461,20 +448,20 @@ function updateLoadedCount(file){
 
     //timeline.push(fullscreen_end)
     console.log(timeline)
-    function startExperiment(){
+    /*function startExperiment(){
       jsPsych.init({
         timeline: timeline,
         use_webaudio: 'false', 
         override_safe_mode: 'true',
         //on_finish: function(){jsPsych.data.displayData();}
       });
-    }
+    }*/
 
-    /*jsPsych.init({
+    jsPsych.init({
         timeline: timeline,
         use_webaudio: 'false', 
         override_safe_mode: 'true',
         //on_finish: function(){jsPsych.data.displayData();}
-    });*/
+    });
 </script>
 </html>
