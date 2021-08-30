@@ -38,7 +38,7 @@ var picture_height = window.innerHeight/100*12
 var space_horizontal = 1 //Horizontal spacing between pictures
 var space_vertical = 1 //Vertical spacing betweem pictures
 
-var X_first = window.innerWidth/100*25
+var X_first = window.innerWidth/100*30
 var X_second = X_first + picture_width + space_horizontal
 var X_third = X_second + picture_width + space_horizontal
 var X_fourth = X_third + picture_width + space_horizontal
@@ -57,7 +57,7 @@ let all_images = ["ListPractice/1.bmp", "ListPractice/2.bmp", "ListPractice/3.bm
 
 //lists for practice
 let practice_picture_list_1 = [
-  {stimulus: "ListPractice/2.bmp", X: X_second, Y: Y_sixth}, //Y_fourth
+  {stimulus: "ListPractice/2.bmp", X: X_second, Y: Y_fourth},
   {stimulus: "ListPractice/3.bmp", X: X_fifth, Y: Y_second},
   {stimulus: "ListPractice/4.bmp", X: X_first, Y: Y_third},
 ]
@@ -89,8 +89,6 @@ let practice_recall_list_2 = [
 
 //picture_list:
 
-//let place_X_order = [window.innerWidth/100*30, window.innerWidth/100*40, window.innerWidth/100*50, window.innerWidth/100*60, window.innerWidth/100*70];
-//let place_Y_order = [window.innerHeight/100*18.58, window.innerHeight/100*34.29, window.innerHeight/100*50, window.innerHeight/100*65.71, window.innerHeight/100*81.42];
 let place_X_order = [X_first, X_second, X_third, X_fourth, X_fifth, X_sixth]
 let place_Y_order = [Y_first, Y_second, Y_third, Y_fourth, Y_fifth, Y_sixth]
 
@@ -103,10 +101,7 @@ for (x=0; x< place_X_order.length; x++){
 }
 console.log(grid_list_order);
 
-//let grid_list = jsPsych.randomization.shuffle(grid_list_order);
-
 let picture_call_order = ["List1/1.bmp", "List1/5.bmp", "List1/7.bmp","List1/8.bmp","List1/9.bmp", "List1/10.bmp", "List1/11.bmp", "List1/13.bmp", "List1/14.bmp", "List1/15.bmp", "List1/16.bmp", "List1/17.bmp", "List1/18.bmp", "List1/19.bmp", "List1/21.bmp", "List1/22.bmp", "List1/23.bmp", "List1/24.bmp", "List1/25.bmp", "List1/26.bmp", "List1/27.bmp", "List1/28.bmp", "List1/29.bmp", "List1/30.bmp", ]
-//let picture_call = jsPsych.randomization.shuffle(picture_call_order) //randomizált képlista, ehelyett kell egy előre randomizált lista, ami ugyanaz lesz mindenkinél
 
 let picture_list = [
   {stimulus: "List1/1.bmp", X: X_fourth, Y: Y_fourth},
@@ -123,8 +118,13 @@ let picture_list = [
   {stimulus: "List1/13.bmp", X: X_fourth, Y: Y_third},
   {stimulus: "List1/14.bmp", X: X_third, Y: Y_first},
   {stimulus: "List1/15.bmp", X: X_first, Y: Y_third},
-  //{stimulus: "List1/16.bmp", X: X_second, Y: Y_fifth},
 ]
+
+//Randomization
+
+//let grid_list = jsPsych.randomization.shuffle(grid_list_order);
+//let picture_call = jsPsych.randomization.shuffle(picture_call_order) //randomizált képlista, ehelyett kell egy előre randomizált lista, ami ugyanaz lesz mindenkinél
+
 /*let picture_list = []
 
 function generate_picture_list(arr){
@@ -232,7 +232,7 @@ console.log(recall_list); */
       drawFunc: function(stimulus, canvas, context){
         context.fillStyle=text_color;
         context.font='52px serif';
-        context.fillText('Hol látta?',  X_second + picture_width*0.5, Y_first*0.6);
+        context.fillText('Hol látta?', X_second + picture_width*0.5, Y_first*0.6);
       }
     };
 
@@ -436,9 +436,8 @@ console.log(recall_list); */
     }
 
     //timeline.push(preload)
-    //timeline.push(fullscreen);
+    timeline.push(fullscreen);
     timeline.push(consent);
-    //timeline.push(preload)
 
     var consented = {
       timeline: [trial_instruction1, trials_practice_memorize_1, trial_instruction2, trials_practice_recall_1, trial_feedback, trial_instruction4, trials_practice_memorize_2, trial_instruction2, trials_practice_recall_2, trial_feedback, trial_instruction3, trials_memorise, trials_recall, fullscreen_end, rip],
