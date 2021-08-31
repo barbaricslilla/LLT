@@ -31,14 +31,14 @@ var text_color = "white"
 var timeline = []
 
 //Picture size
-var picture_width = window.innerWidth/100*7
-var picture_height = window.innerHeight/100*12
+var picture_width = window.innerWidth/100*8
+var picture_height = window.innerHeight/100*13
 
 //Coordinates for easy adjustment
 var space_horizontal = 1 //Horizontal spacing between pictures
 var space_vertical = 1 //Vertical spacing betweem pictures
 
-var X_first = window.innerWidth/100*30
+var X_first = window.innerWidth/100*26
 var X_second = X_first + picture_width + space_horizontal
 var X_third = X_second + picture_width + space_horizontal
 var X_fourth = X_third + picture_width + space_horizontal
@@ -290,7 +290,7 @@ console.log(recall_list); */
       button_label_next: 'Folytatás',
       allow_backward: false,
       on_finish: function() {
-        console.log("trial_instruction1")
+        //console.log("trial_instruction1")
       },
     }
     var trial_instruction2 = {
@@ -346,7 +346,7 @@ console.log(recall_list); */
           data.correct_response = jsPsych.timelineVariable('was', true)
           data.correct = data.button_pressed == data.correct_response
           data.correct_recall = data.correct;
-          console.log(data)
+          //console.log(data)
 
         }
     }
